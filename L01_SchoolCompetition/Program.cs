@@ -39,10 +39,12 @@
             foreach (var studentKvp in orderedStudent)
             {
                 var name = studentKvp.Key;
-                var score = studentKvp.Value;
+                var studentScores = studentKvp.Value;
                 var studentCategories = categories[name];
 
                 var categoryText = $"[{string.Join(", ", studentCategories)}]";
+
+                Console.WriteLine($"{name}: {studentScores} {categoryText}");
             }
         }
     }
