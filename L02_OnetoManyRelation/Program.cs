@@ -6,6 +6,9 @@ namespace L02_OnetoManyRelation
     {
         public static void Main()
         {
+            var db = new MyDbContext();
+            db.Database.EnsureDeleted();
+            db.Database.EnsureCreated();
         }
     }
 }
