@@ -1,8 +1,8 @@
-﻿namespace L02_OnetoManyRelation.Models
+﻿namespace L05_ShopHierarchy.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Employee
+    public class Customer
     {
         public int Id { get; set; }
 
@@ -10,7 +10,7 @@
         [MaxLength(50)]
         public string Name { get; set; }
 
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        public int SalesmanId { get; set; }
+        public Salesman Salesman { get; set; }
     }
 }

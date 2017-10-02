@@ -1,8 +1,8 @@
-﻿namespace L02_OnetoManyRelation
-{
-    using L02_OnetoManyRelation.Models;
-    using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using QueryRelatedData.Models;
 
+namespace QueryRelatedData
+{
     public class MyDbContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
@@ -12,7 +12,6 @@
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer("Server=LENOVO-KOSTOV;Database=MyTempDB;Integrated Security=True;");
-
             base.OnConfiguring(builder);
         }
 
@@ -22,12 +21,13 @@
                 .Entity<Employee>()
                 .HasOne(e => e.Department)
                 .WithMany(d => d.Employees)
-                .HasForeignKey(e => e.DepartmentId);
+                .HasForeignKey(e => e.DepartmentId)
+                .HasConstraintName("FK_Employee_Departmet_DepartmentId");
 
             builder
                 .Entity<Department>()
                 .HasMany(d => d.Employees)
-                .WithOne(e => e.Department);                
+                .WithOne(e => e.Department);
         }
     }
 }

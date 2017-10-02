@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L01_SchoolCompetition", "L01_SchoolCompetition\L01_SchoolCompetition.csproj", "{D54B4026-3927-4A51-A35E-C186283A1F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L01_SchoolCompetition", "L01_SchoolCompetition\L01_SchoolCompetition.csproj", "{D54B4026-3927-4A51-A35E-C186283A1F5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L02_OnetoManyRelation", "L02_OnetoManyRelation\L02_OnetoManyRelation.csproj", "{E37DF311-106A-4582-8479-6A9D926C84F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L02_OnetoManyRelation", "L02_OnetoManyRelation\L02_OnetoManyRelation.csproj", "{E37DF311-106A-4582-8479-6A9D926C84F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L03_SelfReferencedTable", "L02_SelfReferencedTable\L03_SelfReferencedTable.csproj", "{79741944-0D4E-4D56-BFF8-57D3AD1EEC3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L04_ManyToManyRelation", "L04_ManyToManyRelation\L04_ManyToManyRelation.csproj", "{76661FEE-8E9A-4C24-A2E2-C890DE1F017C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseFirstTest", "DatabaseFirstTest\DatabaseFirstTest.csproj", "{86F141C1-DA61-495B-877A-12B7B7A12BF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryRelatedData", "QueryRelatedData\QueryRelatedData.csproj", "{D568C38D-C6EE-406E-A9E4-560D7DB1B083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L05_ShopHierarchy", "L05_ShopHierarchy\L05_ShopHierarchy.csproj", "{EDCD8303-C6E9-443D-97FD-6BA8EC2C99D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +31,26 @@ Global
 		{E37DF311-106A-4582-8479-6A9D926C84F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E37DF311-106A-4582-8479-6A9D926C84F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E37DF311-106A-4582-8479-6A9D926C84F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79741944-0D4E-4D56-BFF8-57D3AD1EEC3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79741944-0D4E-4D56-BFF8-57D3AD1EEC3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79741944-0D4E-4D56-BFF8-57D3AD1EEC3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79741944-0D4E-4D56-BFF8-57D3AD1EEC3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76661FEE-8E9A-4C24-A2E2-C890DE1F017C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76661FEE-8E9A-4C24-A2E2-C890DE1F017C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76661FEE-8E9A-4C24-A2E2-C890DE1F017C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76661FEE-8E9A-4C24-A2E2-C890DE1F017C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F141C1-DA61-495B-877A-12B7B7A12BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F141C1-DA61-495B-877A-12B7B7A12BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F141C1-DA61-495B-877A-12B7B7A12BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F141C1-DA61-495B-877A-12B7B7A12BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D568C38D-C6EE-406E-A9E4-560D7DB1B083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D568C38D-C6EE-406E-A9E4-560D7DB1B083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D568C38D-C6EE-406E-A9E4-560D7DB1B083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D568C38D-C6EE-406E-A9E4-560D7DB1B083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDCD8303-C6E9-443D-97FD-6BA8EC2C99D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDCD8303-C6E9-443D-97FD-6BA8EC2C99D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDCD8303-C6E9-443D-97FD-6BA8EC2C99D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDCD8303-C6E9-443D-97FD-6BA8EC2C99D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

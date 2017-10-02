@@ -1,4 +1,6 @@
-﻿using System;
+﻿using L02_OnetoManyRelation.Models;
+using System;
+using System.Linq;
 
 namespace L02_OnetoManyRelation
 {

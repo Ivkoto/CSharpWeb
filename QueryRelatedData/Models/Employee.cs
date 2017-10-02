@@ -1,4 +1,4 @@
-﻿namespace L02_OnetoManyRelation.Models
+﻿namespace QueryRelatedData.Models
 {
     using System.ComponentModel.DataAnnotations;
 

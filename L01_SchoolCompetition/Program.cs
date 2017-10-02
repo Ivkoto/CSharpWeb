@@ -45,7 +45,7 @@
                 var categoryText = $"[{string.Join(", ", studentCategories)}]";
 
                 Console.WriteLine($"{name}: {studentScores} {categoryText}");
-            }
+            }            
         }
     }
 }
