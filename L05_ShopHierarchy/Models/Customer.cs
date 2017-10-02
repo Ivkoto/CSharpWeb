@@ -1,5 +1,7 @@
 ﻿namespace L05_ShopHierarchy.Models
 {
+    using L05_ShopHierarchy.Entities;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Customer
@@ -12,5 +14,8 @@
 
         public int SalesmanId { get; set; }
         public Salesman Salesman { get; set; }
+
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
