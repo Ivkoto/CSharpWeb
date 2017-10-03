@@ -17,9 +17,11 @@
                 ProcessCommand(db);
                 //PrintSalesmanWithCustomerCount(db);
                 //PrintCustomersWithOrdersAndReviewsCount(db);
-                PrintCustomerOrdersAndReviews(db);
+                //PrintCustomerOrdersAndReviews(db);
+                //PrintCustomerInfo(db);
+                PrintOrdersWithMoreThanOneItem(db);
             }
-        }        
+        }
 
         private static void PrepareDatabase(ShopDbContext db)
         {
@@ -200,6 +202,40 @@
                 Console.WriteLine($"order{order.Id}: {order.ItemCount} items");
             }
             Console.WriteLine($"reviews: {customerData.Reviews}");
+        }
+
+        private static void PrintCustomerInfo(ShopDbContext db)
+        {
+            var customerId = int.Parse(Console.ReadLine());
+
+            var customerData = db
+                .Customers
+                .Where(c => c.Id == customerId)
+                .Select(c => new
+                {
+                    c.Name,
+                    OrdersCount = c.Orders.Count,
+                    ReviewsCount = c.Reviews.Count,
+                    SalesmanName = c.Salesman.Name
+                })
+                .FirstOrDefault();
+
+            Console.WriteLine($"Customer: {customerData.Name}");
+            Console.WriteLine($"Orders count: {customerData.OrdersCount}");
+            Console.WriteLine($"Reviews: {customerData.ReviewsCount}");
+            Console.WriteLine($"Salesman: {customerData.SalesmanName}");
+        }
+
+
+        private static void PrintOrdersWithMoreThanOneItem(ShopDbContext db)
+        {
+            var customerId = int.Parse(Console.ReadLine());
+
+            var orders = db
+                .Orders
+                .Where(o => o.CustomerId == customerId)
+                .Where(o => o.Items.Count > 1)
+                .Count();
         }
     }
 }
