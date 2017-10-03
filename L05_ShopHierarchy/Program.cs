@@ -19,7 +19,7 @@
                 PrintCustomersWithOrdersAndReviewsCount(db);
             }
         }
-        
+
         private static void PrepareDatabase(ShopDbContext db)
         {
             db.Database.EnsureDeleted();
@@ -69,8 +69,8 @@
                         break;
                 }
             }
-        }        
-                
+        }
+
         private static void RegisterCustomer(ShopDbContext db, string[] argumets)
         {
             var customerName = argumets[0];
@@ -86,24 +86,20 @@
         private static void CreateOrder(ShopDbContext db, string[] argumets)
         {
             var customerId = int.Parse(argumets[0]);
-            //db.Add(new Order()
-            //{
-            //    CustomerId = customerId
-            //});
-            //db.SaveChanges();
+
+            //db.Add(new Order() { CustomerId = customerId });            
 
             EntityEntry<Order> currentOrder = db.Add(new Order());
             var currentCustomer = db.Customers.Where(c => c.Id == customerId).FirstOrDefault();
             currentCustomer.Orders.Add(currentOrder.Entity);
+
+            db.SaveChanges();
         }
 
         private static void SaveReview(ShopDbContext db, string[] argumets)
         {
             var customerId = int.Parse(argumets[0]);
-            db.Add(new Review()
-            {
-                CustomerId = customerId
-            });
+            db.Add(new Review() { CustomerId = customerId });
             db.SaveChanges();
         }
 
@@ -125,7 +121,6 @@
                 Console.WriteLine($"{salesmen.Name} - {salesmen.CustomersCount} customers");
             }
         }
-
 
         private static void PrintCustomersWithOrdersAndReviewsCount(ShopDbContext db)
         {

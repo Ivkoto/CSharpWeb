@@ -14,6 +14,10 @@
 
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<OrdersItems> OrdersItems { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer("Server=LENOVO-KOSTOV;Database=MyTempDB;Integrated security=True;");
@@ -46,6 +50,24 @@
                 .WithMany(c => c.Reviews)
                 .HasForeignKey(r => r.CustomerId)
                 .HasConstraintName("FK_Review_Customer_CustomerId");
+
+            builder.Entity<OrdersItems>(entity =>
+            {
+                entity
+                    .HasKey(oi => new { oi.OrderId, oi.ItemId });
+
+                entity
+                    .HasOne(oi => oi.Order)
+                    .WithMany(o => o.Items)
+                    .HasForeignKey(oi => oi.OrderId)
+                    .HasConstraintName("FK_Order_Item_OrderId");
+
+                entity
+                    .HasOne(oi => oi.Item)
+                    .WithMany(i => i.Orders)
+                    .HasForeignKey(oi => oi.ItemId)
+                    .HasConstraintName("FK_Item_Order_ItemId");
+            });
                 
         }
     }
