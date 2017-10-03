@@ -34,7 +34,7 @@
                     customer.HasOne(c => c.Salesman)
                         .WithMany(s => s.Customers)
                         .HasForeignKey(c => c.SalesmanId)
-                        .HasConstraintName("FK_Customer_Salesman_SalesmanId");                    
+                        .HasConstraintName("FK_Customer_Salesman_SalesmanId");
                 });
 
             builder
@@ -51,24 +51,31 @@
                 .HasForeignKey(r => r.CustomerId)
                 .HasConstraintName("FK_Review_Customer_CustomerId");
 
-            builder.Entity<OrdersItems>(entity =>
-            {
-                entity
-                    .HasKey(oi => new { oi.OrderId, oi.ItemId });
+            builder
+                .Entity<OrdersItems>(entity =>
+                {
+                    entity
+                        .HasKey(oi => new { oi.OrderId, oi.ItemId });
 
-                entity
-                    .HasOne(oi => oi.Order)
-                    .WithMany(o => o.Items)
-                    .HasForeignKey(oi => oi.OrderId)
-                    .HasConstraintName("FK_Order_Item_OrderId");
+                    entity
+                        .HasOne(oi => oi.Order)
+                        .WithMany(o => o.Items)
+                        .HasForeignKey(oi => oi.OrderId)
+                        .HasConstraintName("FK_Order_Item_OrderId");
 
-                entity
-                    .HasOne(oi => oi.Item)
-                    .WithMany(i => i.Orders)
-                    .HasForeignKey(oi => oi.ItemId)
-                    .HasConstraintName("FK_Item_Order_ItemId");
-            });
-                
+                    entity
+                        .HasOne(oi => oi.Item)
+                        .WithMany(i => i.Orders)
+                        .HasForeignKey(oi => oi.ItemId)
+                        .HasConstraintName("FK_Item_Order_ItemId");
+                });
+
+            builder
+                .Entity<Item>()
+                .HasMany(i => i.Reviews)
+                .WithOne(r => r.Item)
+                .HasForeignKey(r => r.ItemId)
+                .HasConstraintName("FK_Item_Reviews_ItemId");
         }
     }
 }

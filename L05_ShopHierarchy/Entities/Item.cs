@@ -14,5 +14,7 @@ namespace L05_ShopHierarchy.Entities
         public decimal Price { get; set; }
 
         public ICollection<OrdersItems> Orders { get; set; } = new List<OrdersItems>();
+
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

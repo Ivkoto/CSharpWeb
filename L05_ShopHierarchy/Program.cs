@@ -2,7 +2,6 @@
 {
     using L05_ShopHierarchy.Entities;
     using L05_ShopHierarchy.Models;
-    using Microsoft.EntityFrameworkCore.ChangeTracking;
     using System;
     using System.Linq;
 
@@ -14,11 +13,13 @@
             {
                 PrepareDatabase(db);
                 AddSalesman(db);
+                AddItems(db);
                 ProcessCommand(db);
                 //PrintSalesmanWithCustomerCount(db);
-                PrintCustomersWithOrdersAndReviewsCount(db);
+                //PrintCustomersWithOrdersAndReviewsCount(db);
+                PrintCustomerOrdersAndReviews(db);
             }
-        }
+        }        
 
         private static void PrepareDatabase(ShopDbContext db)
         {
@@ -33,6 +34,25 @@
             {
                 var currentSalesman = new Salesman() { Name = name };
                 db.Add(currentSalesman);
+            }
+            db.SaveChanges();
+        }
+
+        private static void AddItems(ShopDbContext db)
+        {
+            while (true)
+            {
+                var input = Console.ReadLine();
+                if (input == "END")
+                {
+                    break;
+                }
+
+                var itemTokens = input.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                var itemName = itemTokens[0];
+                var itemPrice = decimal.Parse(itemTokens[1]);
+
+                db.Add(new Item() { Name = itemName, Price = itemPrice });
             }
             db.SaveChanges();
         }
@@ -86,12 +106,17 @@
         private static void CreateOrder(ShopDbContext db, string[] argumets)
         {
             var customerId = int.Parse(argumets[0]);
+            var currentOrder = new Order() { CustomerId = customerId };
 
-            //db.Add(new Order() { CustomerId = customerId });            
+            foreach (var itemId in argumets.Skip(1))
+            {
+                currentOrder.Items.Add(new OrdersItems
+                {
+                    ItemId = int.Parse(itemId),
+                });
+            }
 
-            EntityEntry<Order> currentOrder = db.Add(new Order());
-            var currentCustomer = db.Customers.Where(c => c.Id == customerId).FirstOrDefault();
-            currentCustomer.Orders.Add(currentOrder.Entity);
+            db.Add(currentOrder);
 
             db.SaveChanges();
         }
@@ -99,7 +124,14 @@
         private static void SaveReview(ShopDbContext db, string[] argumets)
         {
             var customerId = int.Parse(argumets[0]);
-            db.Add(new Review() { CustomerId = customerId });
+            var itemId = int.Parse(argumets[1]);
+
+            db.Add(new Review()
+            {
+                CustomerId = customerId,
+                ItemId = itemId
+            });
+
             db.SaveChanges();
         }
 
@@ -142,6 +174,32 @@
                 Console.WriteLine($"Orders: {customer.OrdersCount}");
                 Console.WriteLine($"Reviews: {customer.ReviewsCount}");
             }
+        }
+
+        private static void PrintCustomerOrdersAndReviews(ShopDbContext db)
+        {
+            var customerId = int.Parse(Console.ReadLine().Trim());
+            
+            var customerData = db
+                .Customers
+                .Where(c => c.Id == customerId)
+                .Select(c => new
+                {
+                    Orders = c.Orders.Select(o => new
+                    {
+                        o.Id,
+                        ItemCount = o.Items.Count
+                    })
+                    .OrderBy(o => o.Id),
+                    Reviews = c.Reviews.Count
+                })
+                .FirstOrDefault();
+
+            foreach (var order in customerData.Orders)
+            {
+                Console.WriteLine($"order{order.Id}: {order.ItemCount} items");
+            }
+            Console.WriteLine($"reviews: {customerData.Reviews}");
         }
     }
 }
