@@ -1,4 +1,4 @@
-﻿namespace StudentSystem.Models
+﻿namespace StudentSystem.EntityDataModels
 {
     using StudentSystem.Data;
     using System.ComponentModel.DataAnnotations;

@@ -1,7 +1,6 @@
-﻿namespace StudentSystem.Client
+﻿namespace StudentSystem.EntityDataModels
 {
     using Microsoft.EntityFrameworkCore;
-    using StudentSystem.Models;
 
     public class SystemDbContext : DbContext
     {
@@ -47,7 +46,6 @@
                         .HasForeignKey(r => r.CourseId)
                         .HasConstraintName("FK_Resources_Course_CourseId");
                 });
-
 
             builder
                 .Entity<Homework>(entity =>

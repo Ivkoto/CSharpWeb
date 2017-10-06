@@ -1,8 +1,8 @@
-﻿namespace StudentSystem.Models
+﻿namespace StudentSystem.EntityDataModels
 {
+    using StudentSystem.Data;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using StudentSystem.Data;
 
     public class Homework
     {
