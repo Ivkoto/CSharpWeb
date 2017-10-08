@@ -14,6 +14,8 @@
                 db.Database.Migrate();
                 //var dataSeed = new SeedDatabase();
                 //dataSeed.SeedData(db);
+                var request = new DatabaseRequests();
+                request.MakeRequest(db);
             }
         }
 
