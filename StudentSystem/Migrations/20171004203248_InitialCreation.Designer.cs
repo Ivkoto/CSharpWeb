@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StudentSystem.Client;
 using StudentSystem.Data;
+using StudentSystem.EntityDataModels;
 using System;
 
 namespace StudentSystem.Migrations
