@@ -14,7 +14,7 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=LENOVO-KOSTOV;Database=MyTempDB;Integrated Security=True;");
+            builder.UseSqlServer("Server=MSSQLLocalDB;Database=MyTempDB;Integrated Security=True;");
             base.OnConfiguring(builder);
         }
 

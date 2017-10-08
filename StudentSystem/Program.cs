@@ -10,10 +10,10 @@
         {
             using (var db = new SystemDbContext())
             {
-                //ClearDatabase(db);
+               ClearDatabase(db);
                 db.Database.Migrate();
-                //var dataSeed = new SeedDatabase();
-                //dataSeed.SeedData(db);
+                var dataSeed = new SeedDatabase();
+                dataSeed.SeedData(db);
                 var request = new DatabaseRequests();
                 request.MakeRequest(db);
             }
