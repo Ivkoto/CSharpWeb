@@ -13,7 +13,30 @@ namespace StudentSystem.Client
             //PrintCoursesWithMoreThan5Resources(db);
             //PrintCoursesOnGivenDate(db);
             //PrintStudentsWithPricesPerCourse(db);
-            PrintCoursesWithResources(db);
+            //PrintCoursesWithResources(db);
+            PrintStudentsWithCoursesResourcesAndLicenses(db);
+        }
+
+        private void PrintStudentsWithCoursesResourcesAndLicenses(SystemDbContext db)
+        {
+            var result = db
+                .Students
+                .Where(s => s.Cources.Any())
+                .Select(s => new
+                {
+                    s.Name,
+                    Courses = s.Cources.Count,
+                    Resources = s.Cources.Sum(c => c.Course.Resources.Count),
+                    Licenses = s.Cources.Sum(c => c.Course.Resources.Sum(r => r.Licenses.Count()))
+                }).ToList();
+
+            foreach (var student in result)
+            {
+                Console.WriteLine(student.Name);
+                Console.WriteLine($"  Total courses: {student.Courses} ");
+                Console.WriteLine($"  Total resources: {student.Resources}");
+                Console.WriteLine($"  Total licenses: {student.Licenses}");
+            }
         }
 
         private void PrintCoursesWithResources(SystemDbContext db)
