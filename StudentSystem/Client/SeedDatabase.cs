@@ -21,6 +21,26 @@
             List<Course> addedCourses = CourcesSeed(db, totalCourses, currentDate);
             StudenInCourcesSeed(db, totalStudents, totalCourses, addedCourses);
             HomeworksSeed(db, totalCourses, currentDate, addedCourses);
+            LicenseSeed(db);
+        }
+
+        private void LicenseSeed(SystemDbContext db)
+        {
+            var resourceIds = db.Resources.Select(r => r.Id).ToList();
+
+            for (int i = 0; i < resourceIds.Count; i++)
+            {
+                var totalLicenses = random.Next(1, 4);
+                for (int j = 0; j < totalLicenses; j++)
+                {
+                    db.Licenses.Add(new License
+                    {
+                        Name = $"License{i}{j}",
+                        ResourseId = resourceIds[i]
+                    });
+                }
+            }
+            db.SaveChanges();
         }
 
         private static void HomeworksSeed(SystemDbContext db, int totalCourses, DateTime currentDate, List<Course> addedCourses)
@@ -112,12 +132,14 @@
             var addedCourses = new List<Course>();
             for (int i = 0; i < totalCourses; i++)
             {
+                var price = random.Next(50, 350);
                 var course = new Course
                 {
                     Name = $"Course {i}",
                     Description = $"Course details {i}",
                     StartDate = currentDate.AddDays(i),
-                    EndDate = currentDate.AddDays(30 + i)
+                    EndDate = currentDate.AddDays(30 + i),
+                    Price = price
                 };
                 db.Courses.Add(course);
                 addedCourses.Add(course);

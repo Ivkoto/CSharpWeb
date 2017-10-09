@@ -12,6 +12,8 @@
 
         public DbSet<Homework> Homeworks { get; set; }
 
+        public DbSet<License> Licenses { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=MyTempDB;Integrated Security=True;");
@@ -62,17 +64,13 @@
                         .HasForeignKey(h => h.StudentId)
                         .HasConstraintName("FK_Homework_Student_StudentId");
                 });
-            //builder
-            //    .Entity<Homework>()
-            //    .HasOne(h => h.Course)
-            //    .WithMany(c => c.Homeworks)
-            //    .HasForeignKey(h => h.CourseId);
 
-            //builder
-            //    .Entity<Student>()
-            //    .HasMany(s => s.Homeworks)
-            //    .WithOne(h => h.Student)
-            //    .HasForeignKey(h => h.StudentId);
+            builder
+                .Entity<License>()
+                .HasOne(l => l.Resource)
+                .WithMany(r => r.Licenses)
+                .HasForeignKey(l => l.ResourseId)
+                .HasConstraintName("FK_License_Resourse_ResourseId");
         }
     }
 }

@@ -12,7 +12,40 @@ namespace StudentSystem.Client
             //PrintCourcesWithResourses(db);
             //PrintCoursesWithMoreThan5Resources(db);
             //PrintCoursesOnGivenDate(db);
-            PrintStudentsWithPricesPerCourse(db);
+            //PrintStudentsWithPricesPerCourse(db);
+            PrintCoursesWithResources(db);
+        }
+
+        private void PrintCoursesWithResources(SystemDbContext db)
+        {
+            var result = db
+                .Courses
+                .OrderByDescending(c => c.Resources.Count())
+                .ThenBy(c => c.Name)
+                .Select(c => new
+                {
+                    c.Name,
+                    Resources = c.Resources
+                        .OrderByDescending(r => r.Licenses.Count)
+                        .ThenBy(r => r.Name)
+                        .Select(r => new
+                        {
+                            r.Name,
+                            Licenses = r.Licenses.Select(l => l.Name)
+                        })
+                }).ToList();
+
+            foreach (var course in result)
+            {
+                Console.WriteLine(course.Name);
+                foreach (var resource in course.Resources)
+                {
+                    Console.WriteLine($"--Resource: {resource.Name}");
+                    Console.WriteLine($"--Licenses:");
+                    Console.WriteLine("   " + string.Join(",", resource.Licenses));
+                }
+                Console.WriteLine(new string('-', 10));
+            }
         }
 
         private void PrintStudentsWithPricesPerCourse(SystemDbContext db)
@@ -38,6 +71,7 @@ namespace StudentSystem.Client
                 Console.WriteLine($"Courses: {student.Courses}");
                 Console.WriteLine($"Average price by course: {student.AveragePrice:f2}");
                 Console.WriteLine($"Total prise: {student.TotalPrice:f2}");
+                Console.WriteLine(new string('-', 10));
             }
         }
 
