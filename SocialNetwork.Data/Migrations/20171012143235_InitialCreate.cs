@@ -21,7 +21,7 @@ namespace SocialNetwork.Data.Migrations
                     LastTymeLoggedIn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ProfilePicture = table.Column<byte[]>(type: "varbinary(1024)", maxLength: 1024, nullable: true),
-                    RegisteredOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RegisteredOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>

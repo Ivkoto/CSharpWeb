@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
+    using System.Text.RegularExpressions;
 
     [AttributeUsage(AttributeTargets.Property)]
     public class PasswordValidatorAttribute : ValidationAttribute
@@ -11,7 +11,7 @@
 
         public PasswordValidatorAttribute()
         {
-            this.ErrorMessage = $"Password should contain at least: " +
+            base.ErrorMessage = $"Password should contain at least: " +
                  $"1 lowercase letter, " +
                  $"1 uppercase letter, " +
                  $"1 digit, " +
@@ -26,11 +26,10 @@
             {
                 return true;
             }
-            return password.Any(s =>
-                char.IsLower(s)
-                && char.IsUpper(s)
-                && char.IsDigit(s)
-                && this.AllowedSymbols.Contains(s));
+
+            var validationExpression = @"^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!*@#$%^&+=()_<>?\[\]]).*$";
+            Regex regex = new Regex(validationExpression);
+            return regex.IsMatch(password);
         }
     }
 }

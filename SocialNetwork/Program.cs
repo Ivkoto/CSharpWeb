@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SocialNetwork.Data;
-
-namespace SocialNetwork
+﻿namespace SocialNetwork
 {
+    using Microsoft.EntityFrameworkCore;
+    using SocialNetwork.Client;
+    using SocialNetwork.Data;
+
     public class Program
     {
         public static void Main()
@@ -12,9 +13,12 @@ namespace SocialNetwork
                 //db.Database.EnsureDeleted();
                 db.Database.Migrate();
 
-                var seeder = new SeedingData();
-                seeder.SeedUsers(db);
-                
+                //var seeder = new SeedingData();
+                //seeder.SeedUsers(db);
+                //seeder.SeedFriendships(db);
+
+                var dbRequest = new DatabaseRequests();
+                dbRequest.MakeRequest(db);
             }
         }
     }

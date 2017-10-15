@@ -2,12 +2,11 @@
 {
     using SocialNetwork.Data.Attributes;
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class User
-    {        
+    {
         public int Id { get; set; }
 
         [Required]
@@ -27,8 +26,9 @@
 
         [MaxLength(1024)]
         public byte[] ProfilePicture { get; set; }
-        
-        public DateTime? RegisteredOn { get; set; }
+
+        [Required]
+        public DateTime RegisteredOn { get; set; }
 
         public DateTime? LastTymeLoggedIn { get; set; }
 
@@ -39,6 +39,6 @@
 
         public ICollection<Friendship> RelatedFrom { get; set; } = new List<Friendship>();
 
-        public ICollection<Friendship> RelatedTo { get; set; } = new List<Friendship>();        
+        public ICollection<Friendship> RelatedTo { get; set; } = new List<Friendship>();
     }
 }
