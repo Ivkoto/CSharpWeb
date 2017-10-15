@@ -40,5 +40,7 @@
         public ICollection<Friendship> RelatedFrom { get; set; } = new List<Friendship>();
 
         public ICollection<Friendship> RelatedTo { get; set; } = new List<Friendship>();
+
+        public ICollection<Album> Albums { get; set; } = new List<Album>();
     }
 }

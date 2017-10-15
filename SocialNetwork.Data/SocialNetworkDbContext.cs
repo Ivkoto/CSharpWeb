@@ -14,6 +14,10 @@
 
         public DbSet<Friendship> Friendships { get; set; }
 
+        public DbSet<Album> Albums { get; set; }
+
+        public DbSet<Picture> Pictures { get; set; }        
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=MyTempDB;Integrated Security=True");
@@ -35,6 +39,30 @@
                 .WithOne(f => f.ToFriend)
                 .HasForeignKey(f => f.ToFriendId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Album>()
+                .HasOne(a => a.User)
+                .WithMany(u => u.Albums)
+                .HasForeignKey(a => a.UserId)
+                .HasConstraintName("FK_Albums_User_UserId");
+
+            builder.Entity<AlbumPicture>()
+                .HasKey(ap => new { ap.AlbumId, ap.PictureId });
+
+            builder.Entity<AlbumPicture>(entity =>
+            {
+                entity
+                    .HasOne(e => e.Album)
+                    .WithMany(a => a.Pictures)
+                    .HasForeignKey(e => e.AlbumId)
+                    .HasConstraintName("FK_AlbumsPictures_Album_AlbumId");
+
+                entity
+                    .HasOne(e => e.Picture)
+                    .WithMany(p => p.Albums)
+                    .HasForeignKey(e => e.PictureId)
+                    .HasConstraintName("FK_AlbumsPictures_Picture_PictureId");
+            });
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

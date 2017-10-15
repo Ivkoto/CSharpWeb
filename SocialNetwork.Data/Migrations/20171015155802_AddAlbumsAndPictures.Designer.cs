@@ -11,9 +11,10 @@ using System;
 namespace SocialNetwork.Data.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171015155802_AddAlbumsAndPictures")]
+    partial class AddAlbumsAndPictures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,11 +34,7 @@ namespace SocialNetwork.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Albums");
                 });
@@ -117,15 +114,6 @@ namespace SocialNetwork.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("SocialNetwork.Data.EntityDataModels.Album", b =>
-                {
-                    b.HasOne("SocialNetwork.Data.EntityDataModels.User", "User")
-                        .WithMany("Albums")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK_Albums_User_UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SocialNetwork.Data.EntityDataModels.AlbumPicture", b =>

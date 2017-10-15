@@ -9,7 +9,56 @@
         public void MakeRequest(SocialNetworkDbContext db)
         {
             //PrintAllUsersWithFriendsCount(db);
-            PrintAllActiveUsersWithMoreThan5Friends(db);
+            //PrintAllActiveUsersWithMoreThan5Friends(db);
+            //PrintAllAlbums(db);
+            //PrintPictureInMoreThan2Albums(db);
+        }
+
+        private void PrintPictureInMoreThan2Albums(SocialNetworkDbContext db)
+        {
+            var result = db.Pictures
+                .Where(p => p.Albums.Count > 2)
+                .Select(p => new
+                {
+                    p.Title,
+                    AlbumsCount = p.Albums.Count,
+                    Albums = p.Albums.Select(a => new
+                    {
+                        a.Album.Name,
+                        Owner = a.Album.User.Username
+                    })
+                })
+                .OrderByDescending(p => p.AlbumsCount)
+                .ThenBy(p => p.Title).ToList();
+
+            foreach (var picture in result)
+            {
+                Console.WriteLine($"{picture.Title} is present in:");
+                foreach (var album in picture.Albums)
+                {
+                    Console.WriteLine($"  {album.Name} that owned by {album.Owner}");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private void PrintAllAlbums(SocialNetworkDbContext db)
+        {
+            var result = db.Albums
+                .Select(a => new
+                {
+                    a.Name,
+                    Owner = a.User.Username,
+                    Pictures = a.Pictures.Count
+                })
+                .OrderByDescending(a => a.Pictures)
+                .ThenBy(a => a.Owner)
+                .ToList();
+
+            foreach (var album in result)
+            {
+                Console.WriteLine($"{album.Name} is owned by {album.Owner} and have {album.Pictures} pictures");
+            }
         }
 
         private void PrintAllActiveUsersWithMoreThan5Friends(SocialNetworkDbContext db)
