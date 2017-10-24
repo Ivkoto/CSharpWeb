@@ -13,12 +13,14 @@
         [Required]
         public string BackgroundColor { get; set; }
 
-        public bool IsPublic { get; set; }
-
-        public ICollection<AlbumPicture> Pictures { get; set; } = new List<AlbumPicture>();
+        public bool IsPublic { get; set; }        
 
         public int UserId { get; set; }
 
         public User User { get; set; }
+
+        public ICollection<AlbumPicture> Pictures { get; set; } = new List<AlbumPicture>();
+
+        public ICollection<AlbumTag> Tags { get; set; } = new List<AlbumTag>();
     }
 }

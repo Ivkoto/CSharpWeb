@@ -11,8 +11,6 @@
         {
             using (var db = new SocialNetworkDbContext())
             {
-
-
                 //db.Database.EnsureDeleted();
                 db.Database.Migrate();
 
@@ -20,9 +18,10 @@
                 //seeder.SeedUsers(db);
                 //seeder.SeedFriendships(db);
                 //seeder.SeedAlbumsAndPictures(db);
+                //seeder.SeedTags(db);
 
-                var dbRequest = new DatabaseRequests();
-                dbRequest.MakeRequest(db);
+                //var dbRequest = new DatabaseRequests();
+                //dbRequest.MakeRequest(db);
             }
         }
     }

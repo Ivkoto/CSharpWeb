@@ -16,7 +16,9 @@
 
         public DbSet<Album> Albums { get; set; }
 
-        public DbSet<Picture> Pictures { get; set; }        
+        public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
@@ -62,6 +64,24 @@
                     .WithMany(p => p.Albums)
                     .HasForeignKey(e => e.PictureId)
                     .HasConstraintName("FK_AlbumsPictures_Picture_PictureId");
+            });
+
+            builder.Entity<AlbumTag>()
+                .HasKey(at => new { at.AlbumId, at.TagId });
+
+            builder.Entity<AlbumTag>(entity =>
+            {
+                entity
+                    .HasOne(e => e.Album)
+                    .WithMany(a => a.Tags)
+                    .HasForeignKey(e => e.AlbumId)
+                    .HasConstraintName("FK_AlbumTag_Album_AlbumId");
+
+                entity
+                    .HasOne(e => e.Tag)
+                    .WithMany(t => t.Albums)
+                    .HasForeignKey(e => e.TagId)
+                    .HasConstraintName("FK_AlbumTag_Tag_tagId");
             });
         }
 

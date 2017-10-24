@@ -2,7 +2,9 @@
 {
     using SocialNetwork.Data;
     using SocialNetwork.Data.EntityDataModels;
+    using SocialNetwork.Data.Logic;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     public class SeedingData
@@ -12,6 +14,7 @@
         private DateTime currentDate = DateTime.Now;
         private const int initialAlbumCount = 250;
         private const int initialPictureCount = 1000;
+        private const int InitialTagCount = 500;
 
         public void SeedUsers(SocialNetworkDbContext db)
         {
@@ -141,6 +144,53 @@
                 Console.Write(".");
             }
             db.SaveChanges();
+            Console.WriteLine();
+        }
+
+        public void SeedTags(SocialNetworkDbContext db)
+        {
+            //Seeding tags to DB
+            Console.Write("Seeding tags to database");
+            var biggestTagId = db.Tags.OrderBy(t => t.Id).Select(t => t.Id).LastOrDefault() + 1;
+            var albumIds = db.Albums.Select(a => a.Id).ToList();
+
+            for (int i = biggestTagId; i < biggestTagId + InitialTagCount; i++)
+            {
+                db.Tags.Add(new Tag
+                {
+                    TagTitle = TagTransformer.Transform($"Tag {i}")
+                });
+                Console.Write(".");
+            }
+            Console.WriteLine();
+            db.SaveChanges();
+
+            //Adding tags to albums
+            Console.Write("Adding tags to albums");
+            var albums = db.Albums.ToList();
+            var tagIds = db.Tags.Select(t => t.Id).ToList();
+            foreach (var album in albums)
+            {
+                var tagCountPerAlbum = random.Next(0, 10);
+
+                for (int i = 0; i < tagCountPerAlbum; i++)
+                {
+                    var currentTagId = tagIds[random.Next(1, tagIds.Count)];
+
+                    if (album.Tags.Any(t => t.TagId == currentTagId))
+                    {
+                        i--;
+                        continue;
+                    }
+
+                    album.Tags.Add(new AlbumTag
+                    {
+                        TagId = currentTagId
+                    });
+                    Console.Write(".");
+                }
+                db.SaveChanges();
+            }
             Console.WriteLine();
         }
     }
