@@ -22,5 +22,7 @@
         public ICollection<AlbumPicture> Pictures { get; set; } = new List<AlbumPicture>();
 
         public ICollection<AlbumTag> Tags { get; set; } = new List<AlbumTag>();
+
+        public ICollection<UserSharedAlbums> UsersWithRoles { get; set; }
     }
 }

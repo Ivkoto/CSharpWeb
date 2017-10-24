@@ -20,6 +20,8 @@
 
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<UserSharedAlbums> UserSharedAlbums { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=MyTempDB;Integrated Security=True");
@@ -82,6 +84,24 @@
                     .WithMany(t => t.Albums)
                     .HasForeignKey(e => e.TagId)
                     .HasConstraintName("FK_AlbumTag_Tag_tagId");
+            });
+
+            builder.Entity<UserSharedAlbums>()
+                .HasKey(ua => new { ua.UserId, ua.SharedAlbumId });
+
+            builder.Entity<UserSharedAlbums>(entity =>
+            {
+                entity
+                    .HasOne(e => e.User)
+                    .WithMany(u => u.SharedAlbums)
+                    .HasForeignKey(e => e.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity
+                    .HasOne(e => e.SharedAlbum)
+                    .WithMany(sa => sa.UsersWithRoles)
+                    .HasForeignKey(e => e.SharedAlbumId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
 
