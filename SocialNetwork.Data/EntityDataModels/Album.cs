@@ -23,6 +23,6 @@
 
         public ICollection<AlbumTag> Tags { get; set; } = new List<AlbumTag>();
 
-        public ICollection<UserSharedAlbums> UsersWithRoles { get; set; }
+        public ICollection<UserSharedAlbums> UsersWithRoles { get; set; } = new List<UserSharedAlbums>();
     }
 }

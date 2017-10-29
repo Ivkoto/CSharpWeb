@@ -14,14 +14,15 @@
                 //db.Database.EnsureDeleted();
                 db.Database.Migrate();
 
-                //var seeder = new SeedingData();
+                var seeder = new SeedingData();
                 //seeder.SeedUsers(db);
                 //seeder.SeedFriendships(db);
                 //seeder.SeedAlbumsAndPictures(db);
                 //seeder.SeedTags(db);
+                //seeder.ShareAlbums(db);
 
-                //var dbRequest = new DatabaseRequests();
-                //dbRequest.MakeRequest(db);
+                var dbRequest = new DatabaseRequests();
+                dbRequest.MakeRequest(db);
             }
         }
     }

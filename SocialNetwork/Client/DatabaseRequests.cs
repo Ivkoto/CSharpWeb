@@ -16,6 +16,17 @@
             //PrintAllAlbumsByUserId(db);
             //PrintAlbumWithGiventag(db);
             //PrintUsersAlbumsWithMoreThan3Tags(db);
+            PrintUsersWithSharedUsers(db);
+        }
+
+        private void PrintUsersWithSharedUsers(SocialNetworkDbContext db)
+        {
+            var result = db.UserSharedAlbums
+                .Select(us => new
+                {
+                    us.User.Username,
+                    Albums = us.User.SharedAlbums
+                });
         }
 
         private void PrintUsersAlbumsWithMoreThan3Tags(SocialNetworkDbContext db)

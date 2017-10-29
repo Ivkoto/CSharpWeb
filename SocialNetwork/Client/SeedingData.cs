@@ -4,7 +4,6 @@
     using SocialNetwork.Data.EntityDataModels;
     using SocialNetwork.Data.Logic;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     public class SeedingData
@@ -114,7 +113,7 @@
                     BackgroundColor = $"Colour{i}",
                     IsPublic = random.Next(0, 2) == 0 ? true : false,
                     UserId = userIds[random.Next(0, userIds.Count)]
-                });                
+                });
             }
             Console.Write(".");
             db.SaveChanges();
@@ -192,6 +191,33 @@
                 db.SaveChanges();
             }
             Console.WriteLine();
+        }
+
+        public void ShareAlbums(SocialNetworkDbContext db)
+        {
+            Console.Write("Share albums to users");
+            var albums = db.Albums.ToList();
+            var userIds = db.Users.Select(u => u.Id).ToList();
+
+            foreach (var album in albums)
+            {
+                var sharedUsers = random.Next(0, 6);
+                for (int i = 0; i < sharedUsers; i++)
+                {
+                    var currentUserId = userIds[random.Next(0, userIds.Count)];
+                    if (album.UsersWithRoles.Any(u => u.UserId == currentUserId))
+                    {
+                        i--;
+                        continue;
+                    }
+                    album.UsersWithRoles.Add(new UserSharedAlbums
+                    {
+                        UserId = currentUserId
+                    });
+                }
+                db.SaveChanges();
+                Console.Write(".");
+            }
         }
     }
 }

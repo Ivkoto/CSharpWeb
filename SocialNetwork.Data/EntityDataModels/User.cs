@@ -43,6 +43,6 @@
 
         public ICollection<Album> Albums { get; set; } = new List<Album>();
 
-        public ICollection<UserSharedAlbums> SharedAlbums { get; set; }
+        public ICollection<UserSharedAlbums> SharedAlbums { get; set; } = new List<UserSharedAlbums>();
     }
 }
