@@ -1,6 +1,7 @@
 ﻿namespace SocialNetwork.Client
 {
     using SocialNetwork.Data;
+    using SocialNetwork.Data.Enums;
     using SocialNetwork.Data.Logic;
     using System;
     using System.Linq;
@@ -16,17 +17,163 @@
             //PrintAllAlbumsByUserId(db);
             //PrintAlbumWithGiventag(db);
             //PrintUsersAlbumsWithMoreThan3Tags(db);
-            PrintUsersWithSharedUsers(db);
+            //PrintUsersWithSharedUsers(db);
+            //PrintAlbumsSharedWithMoreThan2(db);
+            //PrintAlbumSharedWithGivenUser(db);
+            //PrintAlbumsWithUsersAndUserRoles(db);
+            //PrintGivenUserOwnedAndViewedAlbums(db);
+            PrintUsersWithLessOneViewedAlbumAndPublicAlbums(db);
+        }
+
+        private void PrintUsersWithLessOneViewedAlbumAndPublicAlbums(SocialNetworkDbContext db)
+        {
+            var result = db.Users
+                .Select(u => new
+                {
+                    u.Username,
+                    AlbumsCount = u.SharedAlbums
+                        .Where(sa => sa.SharedAlbum.IsPublic)
+                        .Select(sa => sa.UserRole == UserRole.Viewer)
+                        .Count()
+                })
+                .Where(u => u.AlbumsCount > 7)
+                .ToList();
+
+            foreach (var user in result)
+            {
+                Console.WriteLine($"{user.Username} are viewer of {user.AlbumsCount} public albums.");
+            }
+        }
+
+        private void PrintGivenUserOwnedAndViewedAlbums(SocialNetworkDbContext db)
+        {
+            Console.Write("Write User username.Users must be from User_1 to User_49: ");
+            var currentUser = Console.ReadLine().Trim();
+
+            var result = db.Users
+                .Where(u => u.Username == currentUser)
+                .Select(u => new
+                {
+                    u.Username,
+                    AlbumsCount = u.Albums.Count(),
+                    AlbumsViewed = u.SharedAlbums.Where(a => a.UserRole == UserRole.Viewer).Count()
+                }).FirstOrDefault();
+
+            Console.WriteLine($@"Username: {result.Username}
+  Own {result.AlbumsCount} albums
+  Viewer at {result.AlbumsViewed} albums");
+        }
+
+        private void PrintAlbumsWithUsersAndUserRoles(SocialNetworkDbContext db)
+        {
+            var result = db.Albums
+                .Where(a => a.UsersWithRoles.Any())
+                .Select(a => new
+                {
+                    a.Name,
+                    Owner = a.User.Username,
+                    ViewersCount = a.UsersWithRoles
+                        .Where(ur => ur.UserRole == UserRole.Viewer)
+                        .Count(),
+                    Users = a.UsersWithRoles.Select(ur => new
+                    {
+                        Username = ur.User.Username,
+                        UserRole = ur.UserRole
+                    })
+                })
+                .OrderBy(u => u.Owner)
+                .ThenByDescending(u => u.ViewersCount);
+
+            foreach (var album in result)
+            {
+                Console.WriteLine($"Album name: {album.Name}");
+                Console.WriteLine($"Owner: {album.Owner}");
+                Console.WriteLine($"Viewers: {album.ViewersCount}");
+                Console.WriteLine("All users:");
+                Console.WriteLine(string.Join("\n", album.Users));
+                Console.WriteLine(new string('-', 30));
+            }
+        }
+
+        private void PrintAlbumSharedWithGivenUser(SocialNetworkDbContext db)
+        {
+            Console.WriteLine("Write username. Users must be from User_1 to User_49...");
+            var givenUser = Console.ReadLine();
+            var result = db.Users
+                .Where(u => u.Username == givenUser)
+                .Select(u => new
+                {
+                    u.Username,
+                    SharedAlbums = u.SharedAlbums.Select(sa => new
+                    {
+                        sa.SharedAlbum.Name,
+                        picturesCount = sa.SharedAlbum.Pictures.Count
+                    })
+                    .OrderByDescending(a => a.picturesCount)
+                    .ThenBy(a => a.Name)
+                    .ToList()
+                }).FirstOrDefault();
+
+            Console.WriteLine(result.Username);
+            foreach (var album in result.SharedAlbums)
+            {
+                Console.WriteLine($" album name: {album.Name}");
+                Console.WriteLine($" picture count: {album.picturesCount}");
+            }
+        }
+
+        private void PrintAlbumsSharedWithMoreThan2(SocialNetworkDbContext db)
+        {
+            var result = db.Albums
+                .Where(a => a.UsersWithRoles.Count > 2)
+                .Select(a => new
+                {
+                    a.Name,
+                    NumberOfPeople = a.UsersWithRoles.Count,
+                    a.IsPublic
+                })
+                .OrderByDescending(a => a.NumberOfPeople)
+                .ThenBy(a => a.Name);
+
+            foreach (var album in result)
+            {
+                Console.WriteLine(album.Name);
+                Console.WriteLine($"   shared with: {album.NumberOfPeople}");
+                Console.Write("   Album is: ");
+                Console.WriteLine(album.IsPublic == true ? "public" : "not public");
+            }
         }
 
         private void PrintUsersWithSharedUsers(SocialNetworkDbContext db)
         {
-            var result = db.UserSharedAlbums
-                .Select(us => new
+            var result = db.Users
+                .Where(u => u.SharedAlbums.Any())
+                .Select(u => new
                 {
-                    us.User.Username,
-                    Albums = us.User.SharedAlbums
+                    Name = u.Username,
+                    SharedAlbums = u.SharedAlbums.Select(sa => new
+                    {
+                        AlbumName = sa.SharedAlbum.Name,
+                        SharedWith = sa.SharedAlbum.UsersWithRoles.Select(a => new
+                        {
+                            a.User.Username
+                        }).ToList()
+                    }).ToList()
                 });
+
+            foreach (var user in result)
+            {
+                Console.WriteLine(user.Name);
+                foreach (var album in user.SharedAlbums)
+                {
+                    Console.WriteLine($"  {album.AlbumName}");
+                    foreach (var sUser in album.SharedWith)
+                    {
+                        Console.WriteLine($"--shared with: {sUser.Username}");
+                    }
+                }
+                Console.WriteLine($"   ");
+            }
         }
 
         private void PrintUsersAlbumsWithMoreThan3Tags(SocialNetworkDbContext db)
@@ -69,7 +216,7 @@
             while ((input = Console.ReadLine()) != "end")
             {
                 var tag = TagTransformer.Transform(input);
-                
+
                 var result = db.Albums
                     .Where(a => a.Tags.Any(t => t.Tag.TagTitle == tag))
                     .OrderByDescending(a => a.Tags.Count)
@@ -114,7 +261,8 @@
                     {
                         a.Name,
                         a.IsPublic
-                        ,Pictures = a.Pictures.Select(p => new
+                        ,
+                        Pictures = a.Pictures.Select(p => new
                         {
                             p.Picture.Title,
                             p.Picture.Path
@@ -124,7 +272,7 @@
 
                 Console.WriteLine($"Username: {albumsOwner.Username}");
                 foreach (var album in result)
-                {                    
+                {
                     if (album.IsPublic)
                     {
                         Console.WriteLine($"  {album.Name}:");

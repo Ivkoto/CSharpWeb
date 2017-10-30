@@ -20,6 +20,7 @@
                 //seeder.SeedAlbumsAndPictures(db);
                 //seeder.SeedTags(db);
                 //seeder.ShareAlbums(db);
+                //seeder.UserRoles(db);
 
                 var dbRequest = new DatabaseRequests();
                 dbRequest.MakeRequest(db);

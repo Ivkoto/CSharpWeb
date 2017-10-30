@@ -2,6 +2,7 @@
 {
     using SocialNetwork.Data;
     using SocialNetwork.Data.EntityDataModels;
+    using SocialNetwork.Data.Enums;
     using SocialNetwork.Data.Logic;
     using System;
     using System.Linq;
@@ -218,6 +219,23 @@
                 db.SaveChanges();
                 Console.Write(".");
             }
+        }
+
+        public void UserRoles(SocialNetworkDbContext db)
+        {
+            Console.Write("Seeding user roles");
+            var albums = db.UserSharedAlbums.ToList();
+
+            foreach (var album in albums)
+            {
+                Array UserRoleValues = Enum.GetValues(typeof(UserRole));
+                var currentRole = (UserRole)UserRoleValues.GetValue(random.Next(UserRoleValues.Length));
+
+                album.UserRole = currentRole;
+                Console.Write(".");
+            }
+            db.SaveChanges();
+            Console.WriteLine();
         }
     }
 }
