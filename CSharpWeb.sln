@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L01_SchoolCompetition", "L01_SchoolCompetition\L01_SchoolCompetition.csproj", "{D54B4026-3927-4A51-A35E-C186283A1F5F}"
 EndProject
@@ -21,9 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCoreExercise", "NetCoreE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentSystem", "StudentSystem\StudentSystem.csproj", "{CD3B31AA-1EBB-437F-B936-882DB990E2DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork", "SocialNetwork\SocialNetwork.csproj", "{0E241E20-196A-4292-A006-CDEAD98F9ED7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork", "SocialNetwork\SocialNetwork.csproj", "{0E241E20-196A-4292-A006-CDEAD98F9ED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Data", "SocialNetwork.Data\SocialNetwork.Data.csproj", "{E4993073-AF45-4D31-8CF8-EFD8903D3A28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Data", "SocialNetwork.Data\SocialNetwork.Data.csproj", "{E4993073-AF45-4D31-8CF8-EFD8903D3A28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballBetting", "FootballBetting\FootballBetting.csproj", "{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{E4993073-AF45-4D31-8CF8-EFD8903D3A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4993073-AF45-4D31-8CF8-EFD8903D3A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4993073-AF45-4D31-8CF8-EFD8903D3A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{CD3B31AA-1EBB-437F-B936-882DB990E2DB} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
 		{0E241E20-196A-4292-A006-CDEAD98F9ED7} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
 		{E4993073-AF45-4D31-8CF8-EFD8903D3A28} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
+		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D589A36-C010-4C32-AC0A-55FC49541679}
