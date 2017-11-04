@@ -2,6 +2,11 @@
 {
     using FootballBetting.Models;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
     public class FootballBettingContext : DbContext
     {
@@ -145,7 +150,31 @@
             builder.Entity<Competition>()
                 .HasOne(c => c.CompetitionType)
                 .WithMany(ct => ct.Competitions)
-                .HasForeignKey(c => c.CompetitionTypeId);
+                .HasForeignKey(c => c.CompetitionTypeId);            
+        }
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            var serviceProvider = this.GetService<IServiceProvider>();
+            var ithems = new Dictionary<object, object>();
+            foreach (var entry in this.ChangeTracker.Entries().Where(e => (e.State == EntityState.Added) || (e.State == EntityState.Modified)))
+            {
+                var entity = entry.Entity;
+                var context = new ValidationContext(entity, serviceProvider, ithems);
+                var results = new List<ValidationResult>();
+                if (Validator.TryValidateObject(entity, context, results, true))
+                {
+                    foreach (var result in results)
+                    {
+                        if (result != ValidationResult.Success)
+                        {
+                            throw new ValidationException(result.ErrorMessage);
+                        }
+                    }
+                }
+            }
+
+            return base.SaveChanges(acceptAllChangesOnSuccess);
         }
     }
 }
