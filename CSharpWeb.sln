@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L01_SchoolCompetition", "L01_SchoolCompetition\L01_SchoolCompetition.csproj", "{D54B4026-3927-4A51-A35E-C186283A1F5F}"
 EndProject
@@ -25,7 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork", "SocialNetw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Data", "SocialNetwork.Data\SocialNetwork.Data.csproj", "{E4993073-AF45-4D31-8CF8-EFD8903D3A28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballBetting", "FootballBetting\FootballBetting.csproj", "{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballBetting", "FootballBetting\FootballBetting.csproj", "{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSystem.Client", "BankSystem\BankSystem.Client.csproj", "{2E4B41FD-B686-4A3A-BCE7-B506BC677BE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSystem.Data", "BankSystem.Data\BankSystem.Data.csproj", "{811059CA-3C72-4997-844E-B7246E010A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSystem.Models", "BankSystem.Models\BankSystem.Models.csproj", "{C1F2C319-CD1A-40F8-8ED5-3B1A5AEB0389}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +79,18 @@ Global
 		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E4B41FD-B686-4A3A-BCE7-B506BC677BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E4B41FD-B686-4A3A-BCE7-B506BC677BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E4B41FD-B686-4A3A-BCE7-B506BC677BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E4B41FD-B686-4A3A-BCE7-B506BC677BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811059CA-3C72-4997-844E-B7246E010A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811059CA-3C72-4997-844E-B7246E010A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811059CA-3C72-4997-844E-B7246E010A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811059CA-3C72-4997-844E-B7246E010A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F2C319-CD1A-40F8-8ED5-3B1A5AEB0389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F2C319-CD1A-40F8-8ED5-3B1A5AEB0389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F2C319-CD1A-40F8-8ED5-3B1A5AEB0389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F2C319-CD1A-40F8-8ED5-3B1A5AEB0389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +106,9 @@ Global
 		{0E241E20-196A-4292-A006-CDEAD98F9ED7} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
 		{E4993073-AF45-4D31-8CF8-EFD8903D3A28} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
 		{67D64AE1-94DA-437E-AF9D-61E9DE8C29B6} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
+		{2E4B41FD-B686-4A3A-BCE7-B506BC677BE2} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
+		{811059CA-3C72-4997-844E-B7246E010A0C} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
+		{C1F2C319-CD1A-40F8-8ED5-3B1A5AEB0389} = {0848F37A-9FB5-4A83-9452-A67B92D893ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D589A36-C010-4C32-AC0A-55FC49541679}
