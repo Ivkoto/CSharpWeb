@@ -1,8 +1,5 @@
-﻿
-namespace FootballBetting.Logic
+﻿namespace FootballBetting.Logic
 {
-    using System.Linq;
-
     public class TreeLetterTransformer
     {
         public static string Transform(string value)
@@ -13,7 +10,7 @@ namespace FootballBetting.Logic
             {
                 result = result.Substring(0, 3);
             }
-                        
+
             return result.ToUpper();
         }
     }

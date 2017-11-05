@@ -14,9 +14,10 @@
 
         [Required]
         public string Name { get; set; }
-        
-        public ICollection<Town> Towns { get; set; }
 
-        public ICollection<CountriesContinets> Continents { get; set; }
+        public ICollection<Town> Towns { get; set; } = new List<Town>();
+
+        public ICollection<CountriesContinets> Continents { get; set; } = new List<CountriesContinets>();
+
     }
 }

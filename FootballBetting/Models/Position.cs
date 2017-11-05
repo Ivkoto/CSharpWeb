@@ -1,8 +1,8 @@
 ﻿namespace FootballBetting.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using FootballBetting.Attributes;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class Position
@@ -15,6 +15,6 @@
         [Required]
         public string Description { get; set; }
 
-        public ICollection<Player> Players { get; set; }
+        public ICollection<Player> Players { get; set; } = new List<Player>();
     }
 }

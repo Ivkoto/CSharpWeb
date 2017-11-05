@@ -14,6 +14,6 @@
         
         public  CompetitionType CompetitionType { get; set; }
 
-        public ICollection<Game> Games { get; set; }
+        public ICollection<Game> Games { get; set; } = new List<Game>();
     }
 }

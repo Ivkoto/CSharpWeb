@@ -10,6 +10,6 @@
         [Required]
         public string Name { get; set; }
 
-        public ICollection<CountriesContinets> Countries { get; set; }
+        public ICollection<CountriesContinets> Countries { get; set; } = new List<CountriesContinets>();
     }
 }

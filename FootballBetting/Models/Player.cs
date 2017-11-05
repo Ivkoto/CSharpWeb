@@ -22,6 +22,6 @@
 
         public bool IsCurrentlyInjured { get; set; } = false;
 
-        public ICollection<PlayerStatistic> Games { get; set; }
+        public ICollection<PlayerStatistic> Games { get; set; } = new List<PlayerStatistic>();
     }
 }

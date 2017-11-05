@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace FootballBetting.Models
+﻿namespace FootballBetting.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class User
     {
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace FootballBetting.Models
 
         public decimal Balance { get; set; } = 0;
 
-        public ICollection<Bet> Bets { get; set; }
+        public ICollection<Bet> Bets { get; set; } = new List<Bet>();
     }
 }

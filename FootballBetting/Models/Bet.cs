@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FootballBetting.Models
+﻿namespace FootballBetting.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Bet
     {
         public int Id { get; set; }
@@ -12,11 +10,11 @@ namespace FootballBetting.Models
         public decimal BetMoney { get; set; }
 
         public DateTime BetDate { get; set; }
-        
+
         public int UserId { get; set; }
-        
+
         public User User { get; set; }
 
-        public ICollection<BetGame> Games { get; set; }
+        public ICollection<BetGame> Games { get; set; } = new List<BetGame>();
     }
 }
