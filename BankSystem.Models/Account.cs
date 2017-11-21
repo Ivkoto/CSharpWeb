@@ -1,6 +1,6 @@
 ﻿namespace BankSystem.Models
 {
-    public class Account
+    public abstract class Account
     {
         public int Id { get; set; }
 

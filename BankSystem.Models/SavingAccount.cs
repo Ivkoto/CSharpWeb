@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BankSystem.Models
+﻿namespace BankSystem.Models
 {
     public class SavingAccount : Account
     {

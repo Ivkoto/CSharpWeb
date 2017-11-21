@@ -1,16 +1,16 @@
 ﻿namespace BankSystem.Client
 {
-    using BankSystem.Data;
-    using Microsoft.EntityFrameworkCore;
+    using BankSystem.Client.IO;
+    using BankSystem.Client.Core;
 
     internal class Program
     {
         private static void Main()
         {
-            using (var context = new BankSystemContext())
-            {
-                context.Database.Migrate();
-            }
+            var reader = new Reader();
+            var writer = new Writer();
+
+            var authenticateManager = new AuthenticationManager();
         }
     }
 }
